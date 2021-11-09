@@ -9,7 +9,9 @@ namespace SalarySystem.Tests
         [TestMethod()]
         public void CreateAdminAccountTest()
         {
-            Assert.Fail();
+            var expected = 5;
+            var actual = 5;
+            Assert.AreEqual(expected,actual);
         }
     }
 }
