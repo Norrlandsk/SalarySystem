@@ -6,7 +6,8 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var admin = Setup.CreateAdminAccount();
+            Account.listOfAccounts.Add(admin);
         }
     }
 }
