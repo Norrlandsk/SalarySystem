@@ -1,4 +1,6 @@
-﻿namespace SalarySystem
+﻿using System.Collections.Generic;
+
+namespace SalarySystem
 {
     public class User : Account
     {

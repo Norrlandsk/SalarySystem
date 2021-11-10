@@ -2,10 +2,10 @@
 {
     internal class Program
     {
+        public static Admin admin = Setup.CreateAdminAccount();
+
         private static void Main(string[] args)
         {
-            var admin = Setup.CreateAdminAccount();
-            Account.listOfAccounts.Add(admin);
         }
     }
 }
