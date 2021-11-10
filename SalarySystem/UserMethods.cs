@@ -28,6 +28,9 @@ namespace SalarySystem
                     if (newUsername == account.Username)
                     {
                         Console.WriteLine("That username is already taken!");
+                    }
+                    else
+                    {
                         isAvailable = true;
                     }
                 }
