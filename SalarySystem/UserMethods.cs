@@ -8,34 +8,44 @@ namespace SalarySystem
         // Test that the properties are correctly set
         public static User CreateUserAccount()
         {
-            Console.WriteLine("New username: ");
-            string newUsername = Console.ReadLine();
-            Console.WriteLine("New password: ");
-            string newPassword = Console.ReadLine();
-
-            VerifyValidCredentials(new)
-
-            if (username.Any(char.IsLetter) && username.Any(char.IsDigit))
-            {
-                if (password.Any(char.IsLetter) && password.Any(char.IsDigit))
-                {
-                    User user = new User();
-                    user.Username = username;
-                    user.Password = password;
-                    user.Salary = salary;
-                    user.CompanyRole = role;
-
-                    return user;
-                }
-            }
             return null;
         }
 
-        private static bool VerifyValidCredentials(string username, string password)
+        private static Tuple<string, string> VerifyValidCredentials()
         {
             bool isValid = false;
+            bool isAvailable = false;
 
-            return isValid;
+            do
+            {
+                Console.WriteLine("New username: ");
+                string newUsername = Console.ReadLine();
+                Console.WriteLine("New password: ");
+                string newPassword = Console.ReadLine();
+
+                foreach (var account in Account.listOfAccounts)
+                {
+                    if (newUsername == account.Username)
+                    {
+                        Console.WriteLine("That username is already taken!");
+                        isAvailable = true;
+                    }
+                }
+
+                if (!newUsername.Any(char.IsLetter) ||
+                !newUsername.Any(char.IsDigit) ||
+                !newPassword.Any(char.IsLetter) ||
+                !newPassword.Any(char.IsDigit))
+                {
+                    Console.WriteLine("Account credentials must contain both letters and digits!");
+                }
+                else
+                {
+                    Tuple.Create(newUsername, newPassword);
+                    isValid = true;
+                }
+            } while (!isValid && !isAvailable);
+            return null;
         }
 
         // Test that the user's id does not exist in the list afterwards
