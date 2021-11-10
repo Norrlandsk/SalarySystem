@@ -6,9 +6,13 @@ namespace SalarySystem
     {
         public void AdminListOfUsers()
         {
-            foreach (var user in User.listOfUsers)
+            foreach (var account in Account.listOfAccounts)
             {
-                Console.WriteLine($"Username: {user.Username} Password: {user.Password}");
+                if (account.IsAdmin)
+                {
+                    continue; //Does this work?
+                }
+                Console.WriteLine($"Username: {account.Username} Password: {account.Password}");
             }
         }
 
@@ -30,11 +34,11 @@ namespace SalarySystem
                 string username = "";
                 string password = "";
 
-                foreach (var user in User.listOfUsers)
+                foreach (var user in Account.listOfAccounts)
                 {
                     if (username == user.Username && password == user.Password)
                     {
-                        User.listOfUsers.Remove(user);
+                        Account.listOfAccounts.Remove(user);
                         IsDeleted = true;
                     }
                 }

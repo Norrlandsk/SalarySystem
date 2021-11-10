@@ -1,29 +1,41 @@
-﻿namespace SalarySystem
+﻿using System;
+
+namespace SalarySystem
 {
-    public class AccountAuthentication
+    public static class AccountAuthentication
     {
-        public User Login()
+        private static Tuple<string, string> AskForAccountCredentials()
         {
-            var username = "";
-            var password = "";
-            foreach (var user in User.listOfUsers)
+            Console.WriteLine("Enter your username: ");
+            var username = Console.ReadLine();
+            Console.WriteLine("Enter your password: ");
+            var password = Console.ReadLine();
+
+            return Tuple.Create(username, password);
+        }
+
+        public static Account Login(Tuple<string, string> loginCredentials)
+        {
+            foreach (var account in Account.listOfAccounts)
             {
-                if (username == user.Username && password == user.Password)
+                if (loginCredentials.Item1 == account.Username && loginCredentials.Item2 == account.Password)
                 {
-                    user.IsOnline = true;
-                    return user;
+                    account.IsOnline = true;
+                    return account;
                 }
             }
             return null;
         }
 
-        public void Logout(User user)
+        public static bool Logout(Account account)
         {
-            if(user != null)
+            if (account != null)
             {
-                user.IsOnline = false;
+                account.IsOnline = false;
+                return true;
             }
 
+            return false;
         }
     }
 }

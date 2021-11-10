@@ -25,15 +25,16 @@ namespace SalarySystem
         }
 
         // Test that the user's id does not exist in the list afterwards
-        public static bool RemoveUserAccount(User user)
+        public static bool RemoveUserAccount(Account account, Tuple<string, string> accountCredentials)
         {
-            var username = Console.ReadLine();
-            if (user.Username == username)
+            if (account.Username == accountCredentials.Item1 && account.Password == accountCredentials.Item2)
             {
-                var userToRemove = User.listOfUsers.FirstOrDefault(x => x.UserId == user.UserId);
-                User.listOfUsers.Remove(userToRemove);
+                var userToRemove = Account.listOfAccounts.FirstOrDefault(x => x.AccountId == account.AccountId);
+                Account.listOfAccounts.Remove(userToRemove);
+                Console.WriteLine("User removed!");
                 return true;
             }
+            Console.WriteLine("Something went wrong!");
             return false;
         }
     }
