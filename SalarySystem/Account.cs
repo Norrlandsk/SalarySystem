@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace SalarySystem
+﻿namespace SalarySystem
 {
-    public class Account
+    public abstract class Account
     {
-        public static List<Account> listOfAccounts = new();
+        public bool IsOnline { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public int Salary { get; set; }

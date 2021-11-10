@@ -1,6 +1,6 @@
 ﻿namespace SalarySystem
 {
-    internal class AdminMethods
+    public class AdminMethods
     {
 
     }

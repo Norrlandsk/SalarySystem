@@ -1,6 +1,6 @@
 ﻿namespace SalarySystem
 {
-    public class AccountMethods
+    public class AccountAuthentication
     {
     }
 }
