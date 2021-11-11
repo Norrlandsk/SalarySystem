@@ -2,16 +2,21 @@
 
 namespace SalarySystem
 {
-    public class AccountMethods
+    public static class AccountMethods
     {
-        public void ShowSalary(Account account)
+        public static void ShowSalary(Account account)
         {
             Console.WriteLine(account.Salary);
         }
 
-        public void ShowCompanyRole(Account account)
+        public static void ShowCompanyRole(Account account)
         {
             Console.WriteLine(account.CompanyRole);
+        }
+
+        public static void AddAccountToAccountsList(Account account)
+        {
+            Account.listOfAccounts.Add(account);
         }
     }
 }
