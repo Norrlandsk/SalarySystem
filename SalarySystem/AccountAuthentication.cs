@@ -4,11 +4,11 @@ namespace SalarySystem
 {
     public static class AccountAuthentication
     {
-        private static Tuple<string, string> AskForAccountCredentials()
+        public static Tuple<string, string> AskForAccountCredentials()
         {
-            Console.WriteLine("Enter your username: ");
+            Console.WriteLine("Enter username: ");
             var username = Console.ReadLine();
-            Console.WriteLine("Enter your password: ");
+            Console.WriteLine("Enter password: ");
             var password = Console.ReadLine();
 
             return Tuple.Create(username, password);

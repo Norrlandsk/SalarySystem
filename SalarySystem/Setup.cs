@@ -2,9 +2,9 @@
 {
     public static class Setup
     {
-        public static Admin CreateAdminAccount()
+        public static void CreateAdminAccount()
         {
-            return (Admin)(new("admin1", "admin1234", 25000, "IT-support"));
+            Account.listOfAccounts.Add((Admin)(new("admin1", "admin1234", 25000, "IT-support")));
         }
     }
 }

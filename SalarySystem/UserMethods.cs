@@ -5,13 +5,17 @@ namespace SalarySystem
 {
     public static class UserMethods
     {
-        // Test that the properties are correctly set
-        public static User CreateUserAccount()
+        public static User CreateUserAccount(Tuple<string, string, string> verifiedCredentials)
         {
-            return null;
+            User user = new User();
+            user.Username = verifiedCredentials.Item1;
+            user.Password = verifiedCredentials.Item2;
+            user.CompanyRole = verifiedCredentials.Item3;
+
+            return user;
         }
 
-        private static Tuple<string, string> VerifyValidCredentials()
+        public static Tuple<string, string, string> VerifyValidCredentials()
         {
             bool isValid = false;
             bool isAvailable = false;
@@ -44,8 +48,10 @@ namespace SalarySystem
                 }
                 else
                 {
-                    Tuple.Create(newUsername, newPassword);
                     isValid = true;
+                    Console.WriteLine("New role");
+                    string companyRole = Console.ReadLine();
+                    return Tuple.Create(newUsername, newPassword, companyRole);
                 }
             } while (!isValid && !isAvailable);
             return null;

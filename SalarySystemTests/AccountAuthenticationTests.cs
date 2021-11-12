@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace SalarySystem.Tests
 {
@@ -6,10 +7,33 @@ namespace SalarySystem.Tests
     public class AccountAuthenticationTests
     {
         [TestMethod()]
-        public void LoginTest()
+        public void LoginTest_ShouldReturnTrue_WhenGivenValidCredentials()
         {
-            Assert.Fail();
+            User user = new();
+            user.Username = "elias";
+            user.Password = "hjelm";
+            user.CompanyRole = "janitor";
+
+            Account.listOfAccounts.Add(user);
+            AccountAuthentication.Login(Tuple.Create("elias", "hjelm"));
+
+            Assert.IsTrue(user.IsOnline);
         }
+
+        //[TestMethod()]
+        //public void LoginTest_ShouldReturnFalse_WhenGivenInvalidCredentials()
+        //{
+        //    User user = new();
+        //    user.Username = "elias";
+        //    user.Password = "hjelm";
+        //    user.CompanyRole = "janitor";
+
+        //    Account.listOfAccounts.Add(user);
+        //    AccountAuthentication.Login(Tuple.Create("viktor", "hjelm"));
+
+        //    Assert.IsTrue(user.IsOnline);
+
+        //}
 
         [TestMethod()]
         public void LogoutTest()

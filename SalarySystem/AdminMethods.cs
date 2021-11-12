@@ -20,7 +20,7 @@ namespace SalarySystem
         {
             if (account.IsAdmin)
             {
-                return UserMethods.CreateUserAccount();
+                //return UserMethods.CreateUserAccount();
             }
             return null;
         }
@@ -31,12 +31,11 @@ namespace SalarySystem
 
             if (account.IsAdmin)
             {
-                string username = "";
-                string password = "";
+                var credentials = AccountAuthentication.AskForAccountCredentials();
 
                 foreach (var user in Account.listOfAccounts)
                 {
-                    if (username == user.Username && password == user.Password)
+                    if (credentials.Item1 == user.Username && credentials.Item2 == user.Password && !user.IsAdmin)
                     {
                         Account.listOfAccounts.Remove(user);
                         IsDeleted = true;
