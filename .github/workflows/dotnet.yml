@@ -41,4 +41,3 @@ jobs:
         dotnet-version: 5.0.x
     - name: Test
       run: dotnet test --verbosity normal
-
