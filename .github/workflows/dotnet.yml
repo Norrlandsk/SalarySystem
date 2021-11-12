@@ -8,15 +8,14 @@ on:
 
 jobs:
   build:
-
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix: 
-        os: [ubuntu-latest, windows-latest, macos-latest]
-
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://github.com/Norrlandsk/SalarySystem/tree/staging
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET
+    - name: Setup .NET (build)
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
@@ -26,3 +25,19 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      
+  test:
+    name: test
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://github.com/Norrlandsk/SalarySystem/tree/master
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET (test)
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Test
+      run: dotnet test --verbosity normal
