@@ -1,17 +1,10 @@
 ﻿namespace SalarySystem
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    public class Setup
+    public static class Setup
     {
-        public static int CreateAdminAccount()
+        public static void CreateAdminAccount()
         {
-            int test = 0;
-            return test;
+            Account.listOfAccounts.Add((Admin)(new("admin1", "admin1234", 25000, "IT-support")));
         }
     }
 }
