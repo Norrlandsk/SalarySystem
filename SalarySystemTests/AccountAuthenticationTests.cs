@@ -6,39 +6,55 @@ namespace SalarySystem.Tests
     [TestClass()]
     public class AccountAuthenticationTests
     {
-        [TestMethod()]
-        public void LoginTest_ShouldReturnTrue_WhenGivenValidCredentials()
+        private static User user = new();
+
+        [ClassInitialize]
+        public static void Startup(TestContext testContext)
         {
-            User user = new();
             user.Username = "elias";
             user.Password = "hjelm";
             user.CompanyRole = "janitor";
 
             Account.listOfAccounts.Add(user);
+        }
+
+        [ClassCleanup]
+        public static void Cleanup()
+        {
+            Account.listOfAccounts.Remove(user);
+            user = null;
+        }
+
+        [TestMethod()]
+        public void LoginTest_ShouldReturnTrue_WhenGivenValidCredentials()
+        {
             AccountAuthentication.Login(Tuple.Create("elias", "hjelm"));
 
             Assert.IsTrue(user.IsOnline);
         }
 
-        //[TestMethod()]
-        //public void LoginTest_ShouldReturnFalse_WhenGivenInvalidCredentials()
-        //{
-        //    User user = new();
-        //    user.Username = "elias";
-        //    user.Password = "hjelm";
-        //    user.CompanyRole = "janitor";
+        [TestMethod()]
+        public void LoginTest_ShouldReturnFalse_WhenGivenInvalidUsername()
+        {
+            AccountAuthentication.Login(Tuple.Create("viktor", "hjelm"));
 
-        //    Account.listOfAccounts.Add(user);
-        //    AccountAuthentication.Login(Tuple.Create("viktor", "hjelm"));
-
-        //    Assert.IsTrue(user.IsOnline);
-
-        //}
+            Assert.IsFalse(user.IsOnline);
+        }
 
         [TestMethod()]
-        public void LogoutTest()
+        public void LoginTest_ShouldReturnFalse_WhenGivenInvalidPassword()
         {
-            Assert.Fail();
+            AccountAuthentication.Login(Tuple.Create("elias", "tomten"));
+
+            Assert.IsFalse(user.IsOnline);
+        }
+
+        [TestMethod()]
+        public void LogoutTest_ShouldReturnFalse_WhenAccountIsNotNullAndIsOnline()
+        {
+            AccountAuthentication.Logout(user);
+
+            Assert.IsFalse(user.IsOnline);
         }
     }
 }

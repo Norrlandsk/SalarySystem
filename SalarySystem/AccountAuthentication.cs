@@ -27,15 +27,12 @@ namespace SalarySystem
             return null;
         }
 
-        public static bool Logout(Account account)
+        public static void Logout(Account account)
         {
-            if (account != null)
+            if (account?.IsOnline == true)
             {
                 account.IsOnline = false;
-                return true;
             }
-
-            return false;
         }
     }
 }
