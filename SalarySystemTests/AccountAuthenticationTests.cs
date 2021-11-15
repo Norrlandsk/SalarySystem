@@ -33,7 +33,6 @@ namespace SalarySystem.Tests
             AccountAuthentication.Login(Tuple.Create(account.Username, account.Password));
 
             Assert.IsTrue(account.IsOnline);
-            
 
             return account;
         }
@@ -67,8 +66,10 @@ namespace SalarySystem.Tests
 
         private static IEnumerable<object[]> GetAccount()
         {
-            //var acc = LoginTest_ShouldReturnTrue_WhenGivenValidCredentials(account);
-            yield return new object[] { new User("elias", "hjelm")};
+
+            yield return new object[] { new User("elias", "hjelm") };
+            
+
         }
     }
 }
