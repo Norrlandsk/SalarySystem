@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace SalarySystem.Tests
 {
@@ -25,12 +26,16 @@ namespace SalarySystem.Tests
             Account.listOfAccounts.Remove(user);
         }
 
-        [TestMethod()]
-        public void LoginTest_ShouldReturnTrue_WhenGivenValidCredentials()
+        [DataTestMethod()]
+        [DynamicData(nameof(GetAccount), DynamicDataSourceType.Method)]
+        public IAccount LoginTest_ShouldReturnTrue_WhenGivenValidCredentials(IAccount account)
         {
-            AccountAuthentication.Login(Tuple.Create("elias", "hjelm"));
+            AccountAuthentication.Login(Tuple.Create(account.Username, account.Password));
 
-            Assert.IsTrue(user.IsOnline);
+            Assert.IsTrue(account.IsOnline);
+            
+
+            return account;
         }
 
         [TestMethod()]
@@ -50,11 +55,20 @@ namespace SalarySystem.Tests
         }
 
         [TestMethod()]
-        public void LogoutTest_ShouldReturnFalse_WhenAccountIsNotNullAndIsOnline()
+        [DynamicData(nameof(GetAccount), DynamicDataSourceType.Method)]
+        public Account LogoutTest_ShouldReturnFalse_WhenAccountIsNotNullAndIsOnline(Account account)
         {
-            AccountAuthentication.Logout(user);
+            AccountAuthentication.Logout(account);
 
-            Assert.IsFalse(user.IsOnline);
+            Assert.IsFalse(account.IsOnline);
+
+            return account;
+        }
+
+        private static IEnumerable<object[]> GetAccount()
+        {
+            //var acc = LoginTest_ShouldReturnTrue_WhenGivenValidCredentials(account);
+            yield return new object[] { new User("elias", "hjelm")};
         }
     }
 }

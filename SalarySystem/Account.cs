@@ -2,7 +2,7 @@
 
 namespace SalarySystem
 {
-    public abstract class Account
+    public abstract class Account : IAccount
     {
         public static List<Account> listOfAccounts = new();
         private static int idCounter;
