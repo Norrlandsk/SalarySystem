@@ -14,7 +14,7 @@ namespace SalarySystem.Tests
             user.Username = "elias";
             user.Password = "hjelm";
             user.CompanyRole = "janitor";
-            //user.IsOnline = false;
+            user.IsOnline = false;
 
             Account.listOfAccounts.Add(user);
         }
@@ -39,7 +39,7 @@ namespace SalarySystem.Tests
         {
             AccountAuthentication.Login(Tuple.Create("viktor", "hjelm"));
 
-            Assert.IsTrue(!user.IsOnline);
+            Assert.IsFalse(user.IsOnline);
         }
 
         [TestMethod()]
@@ -55,7 +55,7 @@ namespace SalarySystem.Tests
         {
             AccountAuthentication.Logout(user);
 
-            Assert.IsFalse(user.IsOnline);
+            Assert.IsTrue(!user.IsOnline);
         }
     }
 }
