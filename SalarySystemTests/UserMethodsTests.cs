@@ -9,8 +9,8 @@ namespace SalarySystem.Tests
         private static User userOne = new();
         private static User userTwo = new();
 
-        [ClassInitialize]
-        public static void Startup(TestContext testContext)
+        [TestInitialize]
+        public void Startup()
         {
             userOne.Username = "elias";
             userOne.Password = "hjelm";
@@ -24,13 +24,13 @@ namespace SalarySystem.Tests
             Account.listOfAccounts.Add(userTwo);
         }
 
-        [ClassCleanup]
-        public static void Cleanup()
+        [TestCleanup]
+        public void Cleanup()
         {
             Account.listOfAccounts.Remove(userOne);
             Account.listOfAccounts.Remove(userTwo);
 
-            userOne = null;
+            //userOne = null;
         }
 
         [TestMethod()]

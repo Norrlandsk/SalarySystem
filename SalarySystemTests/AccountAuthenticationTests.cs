@@ -8,22 +8,22 @@ namespace SalarySystem.Tests
     {
         private static User user = new();
 
-        [ClassInitialize]
-        public static void Startup(TestContext testContext)
+        [TestInitialize]
+        public void Startup()
         {
             user.Username = "elias";
             user.Password = "hjelm";
             user.CompanyRole = "janitor";
-            user.IsOnline = false;
+            //user.IsOnline = false;
 
             Account.listOfAccounts.Add(user);
         }
 
-        [ClassCleanup]
-        public static void Cleanup()
+        [TestCleanup]
+        public void Cleanup()
         {
             Account.listOfAccounts.Remove(user);
-            user = null;
+            //user = null;
         }
 
         [TestMethod()]
