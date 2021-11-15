@@ -23,7 +23,6 @@ namespace SalarySystem.Tests
         public void Cleanup()
         {
             Account.listOfAccounts.Remove(user);
-            //user = null;
         }
 
         [TestMethod()]
@@ -47,7 +46,7 @@ namespace SalarySystem.Tests
         {
             AccountAuthentication.Login(Tuple.Create("elias", "tomten"));
 
-            Assert.IsTrue(!user.IsOnline);
+            Assert.IsFalse(user.IsOnline);
         }
 
         [TestMethod()]
@@ -55,7 +54,7 @@ namespace SalarySystem.Tests
         {
             AccountAuthentication.Logout(user);
 
-            Assert.IsTrue(!user.IsOnline);
+            Assert.IsFalse(user.IsOnline);
         }
     }
 }
