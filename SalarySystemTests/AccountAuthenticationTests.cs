@@ -39,7 +39,7 @@ namespace SalarySystem.Tests
         {
             AccountAuthentication.Login(Tuple.Create("viktor", "hjelm"));
 
-            Assert.IsFalse(user.IsOnline);
+            Assert.IsTrue(!user.IsOnline);
         }
 
         [TestMethod()]
@@ -47,7 +47,7 @@ namespace SalarySystem.Tests
         {
             AccountAuthentication.Login(Tuple.Create("elias", "tomten"));
 
-            Assert.IsFalse(user.IsOnline);
+            Assert.IsTrue(!user.IsOnline);
         }
 
         [TestMethod()]
