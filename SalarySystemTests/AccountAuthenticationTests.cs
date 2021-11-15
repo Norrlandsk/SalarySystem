@@ -14,6 +14,7 @@ namespace SalarySystem.Tests
             user.Username = "elias";
             user.Password = "hjelm";
             user.CompanyRole = "janitor";
+            user.IsOnline = false;
 
             Account.listOfAccounts.Add(user);
         }
