@@ -21,22 +21,14 @@ namespace SalarySystemTests
         /*
           1. Create user
           2. Login user
+          3.
           3. Logout user
         */
+        public static User testUser = new();
 
         [TestMethod()]
         public void UserCreationAndLoginAndLogoutTest()
         {
-            UserMethodsTests userMethodsTests = new();
-            AccountAuthenticationTests accountAuthenticationTests = new();
-
-            var user = userMethodsTests.CreateUserAccountTest_ShouldHaveUniqueId();
-            AccountMethods.AddAccountToAccountsList(user);
-            var loggedInUser = accountAuthenticationTests.LoginTest_ShouldReturnTrue_WhenGivenValidCredentials(user);
-
-           // accountAuthenticationTests.LogoutTest_ShouldReturnFalse_WhenAccountIsNotNullAndIsOnline(loggedInUser);
-
-            //accountAuthenticationTests.LogoutTest_ShouldReturnFalse_WhenAccountIsNotNullAndIsOnline(accountAuthenticationTests.GetAccount(loggedInUser));
         }
     }
 }

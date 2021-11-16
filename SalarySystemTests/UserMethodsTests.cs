@@ -34,13 +34,11 @@ namespace SalarySystem.Tests
         }
 
         [TestMethod()]
-        public Account CreateUserAccountTest_ShouldHaveUniqueId()
+        public void CreateUserAccountTest_ShouldHaveUniqueId()
         {
             var expected = userOne;
             var actual = UserMethods.CreateUserAccount(Tuple.Create("elias", "hjelm", "janitor"));
             Assert.AreNotEqual(expected.AccountId, actual.AccountId);
-
-            return actual;
         }
 
         [TestMethod()]

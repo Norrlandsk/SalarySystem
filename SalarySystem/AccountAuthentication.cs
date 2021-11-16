@@ -21,12 +21,10 @@ namespace SalarySystem
                 if (loginCredentials.Item1 == account.Username && loginCredentials.Item2 == account.Password)
                 {
                     account.IsOnline = true;
-                    Console.Clear();
                     Console.WriteLine("You have logged in!");
                     return account;
                 }
             }
-            Console.Clear();
             Console.WriteLine("Something went terribly wrong! There is no account with those credentials!");
             return accountPlaceholder;
         }

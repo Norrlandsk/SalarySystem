@@ -9,6 +9,7 @@ namespace SalarySystem.Tests
     {
         private static User user = new();
 
+        //FRÅGA: Bra practice att ha detta, eller skapa upp objekt i varje testmetod istället
         [TestInitialize]
         public void Startup()
         {
@@ -26,21 +27,18 @@ namespace SalarySystem.Tests
             Account.listOfAccounts.Remove(user);
         }
 
-        [DataTestMethod()]
-        [DynamicData(nameof(GetAccount), DynamicDataSourceType.Method)]
-        public IAccount LoginTest_ShouldReturnTrue_WhenGivenValidCredentials(IAccount account)
+        [TestMethod()]
+        public void LoginTest_ShouldReturnTrue_WhenGivenValidCredentials()
         {
-            AccountAuthentication.Login(Tuple.Create(account.Username, account.Password));
+            AccountAuthentication.Login(user, Tuple.Create(user.Username, user.Password));
 
-            Assert.IsTrue(account.IsOnline);
-
-            return account;
+            Assert.IsTrue(user.IsOnline);
         }
 
         [TestMethod()]
         public void LoginTest_ShouldReturnFalse_WhenGivenInvalidUsername()
         {
-            AccountAuthentication.Login(Tuple.Create("viktor", "hjelm"));
+            AccountAuthentication.Login(user, Tuple.Create("viktor", "hjelm"));
 
             Assert.IsFalse(user.IsOnline);
         }
@@ -48,28 +46,17 @@ namespace SalarySystem.Tests
         [TestMethod()]
         public void LoginTest_ShouldReturnFalse_WhenGivenInvalidPassword()
         {
-            AccountAuthentication.Login(Tuple.Create("elias", "tomten"));
+            AccountAuthentication.Login(user, Tuple.Create("elias", "tomten"));
 
             Assert.IsFalse(user.IsOnline);
         }
 
         [TestMethod()]
-        [DynamicData(nameof(GetAccount), DynamicDataSourceType.Method)]
-        public Account LogoutTest_ShouldReturnFalse_WhenAccountIsNotNullAndIsOnline(Account account)
+        public void LogoutTest_ShouldReturnFalse_WhenAccountIsNotNullAndIsOnline()
         {
-            AccountAuthentication.Logout(account);
+            AccountAuthentication.Logout(user);
 
-            Assert.IsFalse(account.IsOnline);
-
-            return account;
-        }
-
-        private static IEnumerable<object[]> GetAccount()
-        {
-
-            yield return new object[] { new User("elias", "hjelm") };
-            
-
+            Assert.IsFalse(user.IsOnline);
         }
     }
 }
