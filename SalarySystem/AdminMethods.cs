@@ -2,30 +2,41 @@
 
 namespace SalarySystem
 {
-    public class AdminMethods
+    public static class AdminMethods
     {
-        public void AdminListOfUsers()
+        public static void AdminListOfUsers()
         {
-            foreach (var account in Account.listOfAccounts)
+            if (Account.listOfAccounts.Count > 1)
             {
-                if (account.IsAdmin)
+                foreach (var account in Account.listOfAccounts)
                 {
-                    continue; //Does this work?
+                    if (account.IsAdmin)
+                    {
+                        continue; //Does this work?
+                    }
+
+                    Console.WriteLine($"Username: {account.Username} Password: {account.Password}");
                 }
-                Console.WriteLine($"Username: {account.Username} Password: {account.Password}");
+            }
+            else
+            {
+                Console.WriteLine("You are alone in this company!");
             }
         }
 
-        public User AdminCreateUser(Account account)
+        public static User AdminCreateUser(Account account)
         {
             if (account.IsAdmin)
             {
-                //return UserMethods.CreateUserAccount();
+                var user = UserMethods.CreateUserAccount(UserMethods.VerifyValidCredentials());
+                Console.Clear();
+                Console.WriteLine("User has been created!");
+                return user;
             }
             return null;
         }
 
-        public bool AdminRemoveUser(Account account)
+        public static bool AdminRemoveUser(Account account)
         {
             bool IsDeleted = false;
 
@@ -38,7 +49,10 @@ namespace SalarySystem
                     if (credentials.Item1 == user.Username && credentials.Item2 == user.Password && !user.IsAdmin)
                     {
                         Account.listOfAccounts.Remove(user);
+                        Console.Clear();
+                        Console.WriteLine("User has been removed!");
                         IsDeleted = true;
+                        break;
                     }
                 }
             }

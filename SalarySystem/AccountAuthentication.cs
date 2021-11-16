@@ -14,25 +14,31 @@ namespace SalarySystem
             return Tuple.Create(username, password);
         }
 
-        public static Account Login(Tuple<string, string> loginCredentials)
+        public static Account Login(Account accountPlaceholder, Tuple<string, string> loginCredentials)
         {
             foreach (var account in Account.listOfAccounts)
             {
                 if (loginCredentials.Item1 == account.Username && loginCredentials.Item2 == account.Password)
                 {
                     account.IsOnline = true;
+                    Console.Clear();
+                    Console.WriteLine("You have logged in!");
                     return account;
                 }
             }
-            return null;
+            Console.Clear();
+            Console.WriteLine("Something went terribly wrong! There is no account with those credentials!");
+            return accountPlaceholder;
         }
 
-        public static void Logout(Account account)
+        public static Account Logout(Account account)
         {
             if (account?.IsOnline == true)
             {
                 account.IsOnline = false;
+                return account;
             }
+            return account;
         }
     }
 }
