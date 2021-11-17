@@ -13,7 +13,7 @@ namespace SalarySystem
                 {
                     if (account.IsAdmin)
                     {
-                        continue; //Does this work?
+                        continue;
                     }
 
                     Console.WriteLine($"Username: {account.Username} Password: {account.Password}");
