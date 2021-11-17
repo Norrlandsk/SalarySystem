@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
@@ -8,7 +9,7 @@ namespace SalarySystem
     {
         public static User CreateUserAccount(Tuple<string, string, string> verifiedCredentials)
         {
-            User user = new User();
+            User user = new();
             user.Username = verifiedCredentials.Item1;
             user.Password = verifiedCredentials.Item2;
             user.CompanyRole = verifiedCredentials.Item3;
@@ -16,7 +17,7 @@ namespace SalarySystem
             return user;
         }
 
-        public static Tuple<string, string, string> VerifyValidCredentials()
+        public static Tuple<string, string, string> VerifyValidCredentials(List<Account> listOfAccounts)
         {
             bool isValid = false;
             bool isAvailable = false;
@@ -33,7 +34,7 @@ namespace SalarySystem
                 newPassword.Any(char.IsLetter) &&
                 newPassword.Any(char.IsDigit))
                 {
-                    foreach (var account in Account.listOfAccounts)
+                    foreach (var account in listOfAccounts)
                     {
                         if (newUsername == account.Username)
                         {
@@ -63,12 +64,12 @@ namespace SalarySystem
         }
 
         // Test that the user's id does not exist in the list afterwards
-        public static Account RemoveUserAccount(Account account, Tuple<string, string> accountCredentials)
+        public static Account RemoveUserAccount(Account account, Tuple<string, string> accountCredentials, List<Account> listOfAccounts)
         {
             if (account.Username == accountCredentials.Item1 && account.Password == accountCredentials.Item2 && !account.IsAdmin)
             {
-                var userToRemove = Account.listOfAccounts.FirstOrDefault(x => x.AccountId == account.AccountId);
-                Account.listOfAccounts.Remove(userToRemove);
+                var userToRemove = listOfAccounts.FirstOrDefault(x => x.AccountId == account.AccountId);
+                listOfAccounts.Remove(userToRemove);
                 Console.WriteLine("User removed!");
                 account = null;
                 return account;

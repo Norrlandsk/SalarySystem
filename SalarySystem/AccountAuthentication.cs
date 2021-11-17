@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SalarySystem
 {
@@ -14,9 +15,9 @@ namespace SalarySystem
             return Tuple.Create(username, password);
         }
 
-        public static Account Login(Account accountPlaceholder, Tuple<string, string> loginCredentials)
+        public static Account Login(Account accountPlaceholder, Tuple<string, string> loginCredentials, List<Account> listOfAccounts)
         {
-            foreach (var account in Account.listOfAccounts)
+            foreach (var account in listOfAccounts)
             {
                 if (loginCredentials.Item1 == account.Username && loginCredentials.Item2 == account.Password)
                 {

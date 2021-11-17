@@ -8,6 +8,7 @@ namespace SalarySystem.Tests
     public class AccountAuthenticationTests
     {
         private static User user = new();
+        private static List<Account> mockListOfAccounts = new();
 
         //FRÅGA: Bra practice att ha detta, eller skapa upp objekt i varje testmetod istället
         [TestInitialize]
@@ -18,19 +19,19 @@ namespace SalarySystem.Tests
             user.CompanyRole = "janitor";
             user.IsOnline = false;
 
-            Account.listOfAccounts.Add(user);
+            mockListOfAccounts.Add(user);
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            Account.listOfAccounts.Remove(user);
+            mockListOfAccounts.Remove(user);
         }
 
         [TestMethod()]
         public void LoginTest_ShouldReturnTrue_WhenGivenValidCredentials()
         {
-            AccountAuthentication.Login(user, Tuple.Create(user.Username, user.Password));
+            AccountAuthentication.Login(user, Tuple.Create(user.Username, user.Password) , mockListOfAccounts);
 
             Assert.IsTrue(user.IsOnline);
         }
@@ -38,7 +39,7 @@ namespace SalarySystem.Tests
         [TestMethod()]
         public void LoginTest_ShouldReturnFalse_WhenGivenInvalidUsername()
         {
-            AccountAuthentication.Login(user, Tuple.Create("viktor", "hjelm"));
+            AccountAuthentication.Login(user, Tuple.Create("viktor", "hjelm"), mockListOfAccounts);
 
             Assert.IsFalse(user.IsOnline);
         }
@@ -46,7 +47,7 @@ namespace SalarySystem.Tests
         [TestMethod()]
         public void LoginTest_ShouldReturnFalse_WhenGivenInvalidPassword()
         {
-            AccountAuthentication.Login(user, Tuple.Create("elias", "tomten"));
+            AccountAuthentication.Login(user, Tuple.Create("elias", "tomten"), mockListOfAccounts);
 
             Assert.IsFalse(user.IsOnline);
         }

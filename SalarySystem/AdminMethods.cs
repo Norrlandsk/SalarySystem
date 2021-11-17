@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SalarySystem
 {
     public static class AdminMethods
     {
-        public static void AdminListOfUsers()
+        public static void AdminListOfUsers(List<Account> listOfAccounts)
         {
-            if (Account.listOfAccounts.Count > 1)
+            if (listOfAccounts.Count > 1)
             {
-                foreach (var account in Account.listOfAccounts)
+                foreach (var account in listOfAccounts)
                 {
                     if (account.IsAdmin)
                     {
@@ -28,7 +29,7 @@ namespace SalarySystem
         {
             if (account.IsAdmin)
             {
-                var user = UserMethods.CreateUserAccount(UserMethods.VerifyValidCredentials());
+                var user = UserMethods.CreateUserAccount(UserMethods.VerifyValidCredentials(Account.listOfAccounts));
                 Console.Clear();
                 Console.WriteLine("User has been created!");
                 return user;
@@ -36,7 +37,7 @@ namespace SalarySystem
             return null;
         }
 
-        public static bool AdminRemoveUser(Account account)
+        public static bool AdminRemoveUser(Account account, List<Account> listOfAccounts)
         {
             bool IsDeleted = false;
 
@@ -44,11 +45,11 @@ namespace SalarySystem
             {
                 var credentials = AccountAuthentication.AskForAccountCredentials();
 
-                foreach (var user in Account.listOfAccounts)
+                foreach (var user in listOfAccounts)
                 {
                     if (credentials.Item1 == user.Username && credentials.Item2 == user.Password && !user.IsAdmin)
                     {
-                        Account.listOfAccounts.Remove(user);
+                        listOfAccounts.Remove(user);
                         Console.Clear();
                         Console.WriteLine("User has been removed!");
                         IsDeleted = true;

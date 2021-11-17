@@ -1,14 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SalarySystem;
-using SalarySystem.Tests;
 using System;
+using System.Collections.Generic;
 
 namespace SalarySystemTests
 {
     [TestClass()]
-    public class IntegrationTests
+    public class UserIntegrationTest
     {
         private static User mockUser = new();
+        private static User userPlaceholder = new();
+        private static List<Account> mockListOfAccounts = new();
 
         [ClassInitialize]
         public static void Startup(TestContext tc)
@@ -21,26 +23,36 @@ namespace SalarySystemTests
 
         /*
           1. Create user
-          2. Login user
-          3. Logout user
+          2. Add user to list
+          3. Login user
+          4. Logout user
         */
-        public static User userPlaceholder = new();
 
         [TestMethod()]
         public void CreateUserAccountTest_ShouldHaveUniqueId()
         {
             var expected = mockUser;
             var actual = UserMethods.CreateUserAccount(Tuple.Create("elias", "hjelm", "janitor"));
-            Assert.AreNotEqual(expected.AccountId, actual.AccountId);
             userPlaceholder = actual;
+
+            Assert.AreNotEqual(expected.AccountId, actual.AccountId);
+        }
+
+        [TestMethod()]
+        public void AddAccountToAccountsListTest_ShouldAddAccountToList()
+        {
+            var oldListCount = mockListOfAccounts.Count;
+            AccountMethods.AddAccountToAccountsList(userPlaceholder, mockListOfAccounts);
+            var newListCount = mockListOfAccounts.Count;
+
+            Assert.AreNotEqual(oldListCount, newListCount);
         }
 
         [TestMethod()]
         public void LoginTest_ShouldReturnTrue_WhenGivenValidCredentials()
         {
-            Console.WriteLine($"{userPlaceholder.IsOnline}");
-
-            AccountAuthentication.Login(userPlaceholder, Tuple.Create(userPlaceholder.Username, userPlaceholder.Password));
+            mockListOfAccounts.Add(userPlaceholder);
+            AccountAuthentication.Login(userPlaceholder, Tuple.Create(userPlaceholder.Username, userPlaceholder.Password), mockListOfAccounts);
 
             Assert.IsTrue(userPlaceholder.IsOnline);
         }
@@ -48,7 +60,6 @@ namespace SalarySystemTests
         [TestMethod()]
         public void LogoutTest_ShouldReturnFalse_WhenAccountIsNotNullAndIsOnline()
         {
-            Console.WriteLine($"{userPlaceholder.IsOnline}");
             AccountAuthentication.Logout(userPlaceholder);
 
             Assert.IsFalse(userPlaceholder.IsOnline);

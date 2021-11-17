@@ -1,12 +1,8 @@
 ﻿namespace SalarySystem
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    public class Menu
+    public static class Menu
     {
         public static Account accountPlaceholder;
 
@@ -38,14 +34,14 @@
                 {
                     case 1:
                         Console.Clear();
-                        accountPlaceholder = AccountAuthentication.Login(accountPlaceholder, AccountAuthentication.AskForAccountCredentials());
+                        accountPlaceholder = AccountAuthentication.Login(accountPlaceholder, AccountAuthentication.AskForAccountCredentials(), Account.listOfAccounts);
 
                         Utils.ContinueAndClear();
                         break;
 
                     case 2:
                         Console.Clear();
-                        AccountMethods.AddAccountToAccountsList(UserMethods.CreateUserAccount(UserMethods.VerifyValidCredentials()));
+                        AccountMethods.AddAccountToAccountsList(UserMethods.CreateUserAccount(UserMethods.VerifyValidCredentials(Account.listOfAccounts)), Account.listOfAccounts);
                         Utils.ContinueAndClear();
                         break;
 
@@ -81,7 +77,7 @@
                         Console.Clear();
                         if (accountPlaceholder != null && accountPlaceholder.IsOnline)
                         {
-                            accountPlaceholder = UserMethods.RemoveUserAccount(accountPlaceholder, AccountAuthentication.AskForAccountCredentials());
+                            accountPlaceholder = UserMethods.RemoveUserAccount(accountPlaceholder, AccountAuthentication.AskForAccountCredentials(), Account.listOfAccounts);
                             Utils.ContinueAndClear();
                         }
                         else
@@ -95,7 +91,7 @@
                         Console.Clear();
                         if (accountPlaceholder != null && accountPlaceholder.IsAdmin)
                         {
-                            AdminMethods.AdminListOfUsers();
+                            AdminMethods.AdminListOfUsers(Account.listOfAccounts);
                             Utils.ContinueAndClear();
                         }
                         else
@@ -109,7 +105,7 @@
                         Console.Clear();
                         if (accountPlaceholder != null && accountPlaceholder.IsAdmin)
                         {
-                            AccountMethods.AddAccountToAccountsList(AdminMethods.AdminCreateUser(accountPlaceholder));
+                            AccountMethods.AddAccountToAccountsList(AdminMethods.AdminCreateUser(accountPlaceholder), Account.listOfAccounts);
                             Utils.ContinueAndClear();
                         }
                         else
@@ -123,7 +119,7 @@
                         Console.Clear();
                         if (accountPlaceholder != null && accountPlaceholder.IsAdmin)
                         {
-                            AdminMethods.AdminRemoveUser(accountPlaceholder);
+                            AdminMethods.AdminRemoveUser(accountPlaceholder, Account.listOfAccounts);
                             Utils.ContinueAndClear();
                         }
                         else

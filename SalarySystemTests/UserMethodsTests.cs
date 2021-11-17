@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace SalarySystem.Tests
 {
@@ -8,6 +9,7 @@ namespace SalarySystem.Tests
     {
         private static User userOne = new();
         private static User userTwo = new();
+        private static List<Account> mockListOfAccounts = new();
 
         [TestInitialize]
         public void Startup()
@@ -20,17 +22,15 @@ namespace SalarySystem.Tests
             userTwo.Password = "hjelm";
             userTwo.CompanyRole = "janitor";
 
-            Account.listOfAccounts.Add(userOne);
-            Account.listOfAccounts.Add(userTwo);
+            mockListOfAccounts.Add(userOne);
+            mockListOfAccounts.Add(userTwo);
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            Account.listOfAccounts.Remove(userOne);
-            Account.listOfAccounts.Remove(userTwo);
-
-            //userOne = null;
+            mockListOfAccounts.Remove(userOne);
+            mockListOfAccounts.Remove(userTwo);
         }
 
         [TestMethod()]
@@ -44,9 +44,9 @@ namespace SalarySystem.Tests
         [TestMethod()]
         public void RemoveUserAccountTest_ShouldRemoveUserAccountFromList_WhenValidCredentials()
         {
-            var oldListCount = Account.listOfAccounts.Count;
-            UserMethods.RemoveUserAccount(userOne, Tuple.Create("elias", "hjelm"));
-            var newListCount = Account.listOfAccounts.Count;
+            var oldListCount = mockListOfAccounts.Count;
+            UserMethods.RemoveUserAccount(userOne, Tuple.Create("elias", "hjelm"), mockListOfAccounts);
+            var newListCount = mockListOfAccounts.Count;
 
             Assert.AreNotEqual(oldListCount, newListCount);
         }
@@ -54,9 +54,9 @@ namespace SalarySystem.Tests
         [TestMethod()]
         public void RemoveUserAccountTest_ShouldNotRemoveUserAccountFromList_WhenInvalidCredentials()
         {
-            var oldListCount = Account.listOfAccounts.Count;
-            UserMethods.RemoveUserAccount(userTwo, Tuple.Create("elias", "hjelm"));
-            var newListCount = Account.listOfAccounts.Count;
+            var oldListCount = mockListOfAccounts.Count;
+            UserMethods.RemoveUserAccount(userTwo, Tuple.Create("elias", "hjelm"), mockListOfAccounts);
+            var newListCount = mockListOfAccounts.Count;
 
             Assert.AreEqual(oldListCount, newListCount);
         }
