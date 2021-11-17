@@ -75,9 +75,14 @@
 
                     case 5:
                         Console.Clear();
-                        if (accountPlaceholder != null && accountPlaceholder.IsOnline)
+                        if (accountPlaceholder != null && accountPlaceholder.IsOnline && !accountPlaceholder.IsAdmin)
                         {
                             accountPlaceholder = UserMethods.RemoveUserAccount(accountPlaceholder, AccountAuthentication.AskForAccountCredentials(), Account.listOfAccounts);
+                            Utils.ContinueAndClear();
+                        }
+                        else if(accountPlaceholder != null && accountPlaceholder.IsAdmin)
+                        {
+                            Console.WriteLine("Admin is not allowed to do this.");
                             Utils.ContinueAndClear();
                         }
                         else
@@ -89,42 +94,42 @@
 
                     case 6:
                         Console.Clear();
-                        if (accountPlaceholder != null && accountPlaceholder.IsAdmin)
+                        if (accountPlaceholder != null && accountPlaceholder.IsAdmin && accountPlaceholder.IsOnline)
                         {
                             AdminMethods.AdminListOfUsers(Account.listOfAccounts);
                             Utils.ContinueAndClear();
                         }
                         else
                         {
-                            Console.WriteLine("You have to be administrator!");
+                            Console.WriteLine("You have to be logged in as an administrator!");
                             Utils.ContinueAndClear();
                         }
                         break;
 
                     case 7:
                         Console.Clear();
-                        if (accountPlaceholder != null && accountPlaceholder.IsAdmin)
+                        if (accountPlaceholder != null && accountPlaceholder.IsAdmin && accountPlaceholder.IsOnline)
                         {
                             AccountMethods.AddAccountToAccountsList(AdminMethods.AdminCreateUser(accountPlaceholder), Account.listOfAccounts);
                             Utils.ContinueAndClear();
                         }
                         else
                         {
-                            Console.WriteLine("You have to be administrator!");
+                            Console.WriteLine("You have to be logged in as an administrator!");
                             Utils.ContinueAndClear();
                         }
                         break;
 
                     case 8:
                         Console.Clear();
-                        if (accountPlaceholder != null && accountPlaceholder.IsAdmin)
+                        if (accountPlaceholder != null && accountPlaceholder.IsAdmin && accountPlaceholder.IsOnline)
                         {
                             AdminMethods.AdminRemoveUser(accountPlaceholder, Account.listOfAccounts);
                             Utils.ContinueAndClear();
                         }
                         else
                         {
-                            Console.WriteLine("You have to be administrator!");
+                            Console.WriteLine("You have to be logged in as an administrator!");
                             Utils.ContinueAndClear();
                         }
                         break;
