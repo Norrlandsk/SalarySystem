@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: push to staging and build
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     environment:
@@ -23,11 +24,9 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
       
   test:
-    name: test
+    name: pull request to production and test
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     environment:
@@ -41,3 +40,4 @@ jobs:
         dotnet-version: 5.0.x
     - name: Test
       run: dotnet test --verbosity normal
+      

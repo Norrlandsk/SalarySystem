@@ -1,31 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SalarySystem
 {
-    public class AdminMethods
+    public static class AdminMethods
     {
-        public void AdminListOfUsers()
+        public static void AdminListOfUsers(List<Account> listOfAccounts)
         {
-            foreach (var account in Account.listOfAccounts)
+            if (listOfAccounts.Count > 1)
             {
-                if (account.IsAdmin)
+                foreach (var account in listOfAccounts)
                 {
-                    continue; //Does this work?
+                    if (account.IsAdmin)
+                    {
+                        continue;
+                    }
+
+                    Console.WriteLine($"Username: {account.Username} Password: {account.Password}");
                 }
-                Console.WriteLine($"Username: {account.Username} Password: {account.Password}");
+            }
+            else
+            {
+                Console.WriteLine("You are alone in this company!");
             }
         }
 
-        public User AdminCreateUser(Account account)
+        public static User AdminCreateUser(Account account)
         {
             if (account.IsAdmin)
             {
-                //return UserMethods.CreateUserAccount();
+                var user = UserMethods.CreateUserAccount(UserMethods.VerifyValidCredentials(Account.listOfAccounts));
+                Console.Clear();
+                Console.WriteLine("User has been created!");
+                return user;
             }
             return null;
         }
 
-        public bool AdminRemoveUser(Account account)
+        public static bool AdminRemoveUser(Account account, List<Account> listOfAccounts)
         {
             bool IsDeleted = false;
 
@@ -33,12 +45,15 @@ namespace SalarySystem
             {
                 var credentials = AccountAuthentication.AskForAccountCredentials();
 
-                foreach (var user in Account.listOfAccounts)
+                foreach (var user in listOfAccounts)
                 {
                     if (credentials.Item1 == user.Username && credentials.Item2 == user.Password && !user.IsAdmin)
                     {
-                        Account.listOfAccounts.Remove(user);
+                        listOfAccounts.Remove(user);
+                        Console.Clear();
+                        Console.WriteLine("User has been removed!");
                         IsDeleted = true;
+                        break;
                     }
                 }
             }

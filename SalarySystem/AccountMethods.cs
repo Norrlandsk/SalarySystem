@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SalarySystem
 {
@@ -14,9 +15,9 @@ namespace SalarySystem
             Console.WriteLine(account.CompanyRole);
         }
 
-        public static void AddAccountToAccountsList(Account account)
+        public static void AddAccountToAccountsList(Account account, List<Account> listOfAccounts)
         {
-            Account.listOfAccounts.Add(account);
+            listOfAccounts.Add(account);
         }
     }
 }
