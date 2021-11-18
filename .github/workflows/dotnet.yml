@@ -26,7 +26,7 @@ jobs:
       run: dotnet build --no-restore
     - name: Unit test
       working-directory: ./SalarySystemTests/UnitTests
-      run: dotnet test --verbosity normal --no-build
+      run: dotnet test --verbosity normal
       
       
   unitTestAndIntegrationTest:
