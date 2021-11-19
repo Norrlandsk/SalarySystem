@@ -28,7 +28,7 @@ namespace SalarySystemTests
           4. Logout user
         */
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Integration")]
         public void CreateUserAccountTest_ShouldHaveUniqueId()
         {
             var expected = mockUser;
