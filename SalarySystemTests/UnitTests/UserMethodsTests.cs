@@ -33,7 +33,7 @@ namespace SalarySystem.Tests
             mockListOfAccounts.Remove(userTwo);
         }
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Unit")]
         public void CreateUserAccountTest_ShouldHaveUniqueId()
         {
             var expected = userOne;
@@ -41,7 +41,7 @@ namespace SalarySystem.Tests
             Assert.AreNotEqual(expected.AccountId, actual.AccountId);
         }
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Unit")]
         public void RemoveUserAccountTest_ShouldRemoveUserAccountFromList_WhenValidCredentials()
         {
             var oldListCount = mockListOfAccounts.Count;
@@ -51,7 +51,7 @@ namespace SalarySystem.Tests
             Assert.AreNotEqual(oldListCount, newListCount);
         }
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Unit")]
         public void RemoveUserAccountTest_ShouldNotRemoveUserAccountFromList_WhenInvalidCredentials()
         {
             var oldListCount = mockListOfAccounts.Count;

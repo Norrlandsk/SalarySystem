@@ -28,7 +28,7 @@ namespace SalarySystem.Tests
             mockListOfAccounts.Remove(user);
         }
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Unit")]
         public void LoginTest_ShouldReturnTrue_WhenGivenValidCredentials()
         {
             AccountAuthentication.Login(user, Tuple.Create(user.Username, user.Password) , mockListOfAccounts);
@@ -36,7 +36,7 @@ namespace SalarySystem.Tests
             Assert.IsTrue(user.IsOnline);
         }
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Unit")]
         public void LoginTest_ShouldReturnFalse_WhenGivenInvalidUsername()
         {
             AccountAuthentication.Login(user, Tuple.Create("viktor", "hjelm"), mockListOfAccounts);
@@ -44,7 +44,7 @@ namespace SalarySystem.Tests
             Assert.IsFalse(user.IsOnline);
         }
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Unit")]
         public void LoginTest_ShouldReturnFalse_WhenGivenInvalidPassword()
         {
             AccountAuthentication.Login(user, Tuple.Create("elias", "tomten"), mockListOfAccounts);
@@ -52,7 +52,7 @@ namespace SalarySystem.Tests
             Assert.IsFalse(user.IsOnline);
         }
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Unit")]
         public void LogoutTest_ShouldReturnFalse_WhenAccountIsNotNullAndIsOnline()
         {
             AccountAuthentication.Logout(user);

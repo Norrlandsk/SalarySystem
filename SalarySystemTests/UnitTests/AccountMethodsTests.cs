@@ -8,7 +8,7 @@ namespace SalarySystem.Tests
     {
         private static List<Account> mockListOfAccounts = new();
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Unit")]
         public void AddAccountToAccountsListTest_ShouldAddAccountToList()
         {
             User userOne = new();

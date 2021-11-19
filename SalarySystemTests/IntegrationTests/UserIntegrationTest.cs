@@ -48,7 +48,7 @@ namespace SalarySystemTests
             Assert.AreNotEqual(oldListCount, newListCount);
         }
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Integration")]
         public void LoginTest_ShouldReturnTrue_WhenGivenValidCredentials()
         {
             mockListOfAccounts.Add(userPlaceholder);
@@ -57,7 +57,7 @@ namespace SalarySystemTests
             Assert.IsTrue(userPlaceholder.IsOnline);
         }
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Integration")]
         public void LogoutTest_ShouldReturnFalse_WhenAccountIsNotNullAndIsOnline()
         {
             AccountAuthentication.Logout(userPlaceholder);
