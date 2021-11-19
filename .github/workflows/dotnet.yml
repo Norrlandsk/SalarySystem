@@ -25,7 +25,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Unit test
-      run: dotnet test --verbosity normal --no-build --filter TestCategory=Integration
+      run: dotnet test --verbosity normal --no-build --filter TestCategory=Unit
       
       
   unitTestAndIntegrationTest:
@@ -42,9 +42,8 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Unit test
-      run: dotnet test --verbosity normal
-      working-directory: ./../../SalarySystemTests/UnitTests
+      run: dotnet test --verbosity normal --filter TestCategory=Unit
     - name: Integration test
-      run: dotnet test --verbosity normal --no-build
-      working-directory: ./../../SalarySystemTests/IntegrationTests
+      run: dotnet test --verbosity normal --no-build --filter TestCategory=Integration
+     
       
