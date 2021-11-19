@@ -25,7 +25,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Unit test
-      run: dotnet test --verbosity normal --no-build --filter !TestCategory=Integration
+      run: dotnet test --verbosity normal --no-build --filter TestCategory=Integration
       
       
   unitTestAndIntegrationTest:
