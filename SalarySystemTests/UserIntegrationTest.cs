@@ -38,7 +38,7 @@ namespace SalarySystemTests
             Assert.AreNotEqual(expected.AccountId, actual.AccountId);
         }
 
-        [TestMethod()]
+        [TestMethod(), TestCategory("Integration")]
         public void AddAccountToAccountsListTest_ShouldAddAccountToList()
         {
             var oldListCount = mockListOfAccounts.Count;
