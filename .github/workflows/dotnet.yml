@@ -25,9 +25,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Unit test
-      run: dotnet test --verbosity normal --no-build
-      working-directory: ./SalarySystemTests/UnitTests
-      
+      run: dotnet test --verbosity normal --no-build --filter ClassName=SalarySystemTests.UserMethodsTests.cs
       
       
   unitTestAndIntegrationTest:
